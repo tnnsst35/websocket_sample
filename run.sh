@@ -1,13 +1,5 @@
 #!/bin/bash
 
-GUEST_HOST_NAME="webview-sample"
-
-HOST_FORWARDING_PORT="8080"
-GUEST_FORWARDING_PORT="8080"
-
-HOST_MOUNT_PATH=`pwd`
-GUEST_MOUNT_PATH="/workspace"
-
-REPOSITORY_NAME="tnnsst35/websocket-sample"
+. ./config.sh
 
 docker run -i -t -h ${GUEST_HOST_NAME} -p ${HOST_FORWARDING_PORT}:${GUEST_FORWARDING_PORT} -v ${HOST_MOUNT_PATH}:${GUEST_MOUNT_PATH} ${REPOSITORY_NAME} /bin/bash
