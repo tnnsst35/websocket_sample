@@ -27,15 +27,22 @@ ENV GO_HOME=/usr/local/go
 
 ENV PATH=$PATH:$GO_HOME/bin
 
-RUN echo 'GOPATH=$HOME/go:/workspace/go' >> /etc/profile.d/go.sh
+RUN echo 'export GOPATH=$HOME/go:/workspace/go' >> /etc/profile.d/go.sh
 
 RUN mkdir /etc/skel/go
 
 RUN mkdir $HOME/go
 
-# Nginx+PHPのインストール
-
 # Node.jsのインストール
+RUN git clone https://github.com/creationix/nvm.git /usr/local/nvm
+
+RUN echo 'export NVM_HOME=/usr/local/nvm' >> /etc/profile.d/nvm.sh
+
+RUN echo '. $NVM_HOME/nvm.sh' >> /etc/profile.d/nvm.sh
+
+RUN . /etc/profile.d/nvm.sh && nvm install v4.3.2 && nvm use v4.3.2
+
+# Nginx+PHPのインストール
 
 # 開放ポート
 EXPOSE 8080

@@ -22,3 +22,12 @@ Docker container.
 3. \# go build chat ./
 4. \# ./chat
 5. Please open with web browser. http://localhost:8080
+
+## Node.js
+Operation on the guest machine.
+Docker container.
+
+1. \# cd /workspace/nodejs/src/chat
+2. \# sh init.sh
+3. \# node app.js
+4. Please open with web browser. http://localhost:8080
