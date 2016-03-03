@@ -10,14 +10,15 @@ Operation on the host machine.
 
 1. $ git clone https://github.com/tnnsst35/websocket_sample.git
 2. $ cd websocket_sample
-3. $ sh run.sh
+3. $ sh build.sh
+4. $ sh run.sh
 
 ## golang
 Operation on the guest machine.
 Docker container.
 
-4. \# cd /workspace/go/src/chat
-5. \# sh init.sh
-6. \# go build chat ./
-7. \# ./chat
-9. Please open with web browser. http://localhost:8080
+1. \# cd /workspace/go/src/chat
+2. \# sh init.sh
+3. \# go build chat ./
+4. \# ./chat
+5. Please open with web browser. http://localhost:8080
