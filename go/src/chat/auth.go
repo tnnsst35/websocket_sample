@@ -69,3 +69,12 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(http.StatusNotFound)
     }
 }
+
+func logoutHandler(w http.ResponseWriter, r *http.Request) {
+    http.SetCookie(w, &http.Cookie{
+        Name: "auth",
+        Path: "/",
+        MaxAge: -1})
+    w.Header().Set("Location", "/login")
+    w.WriteHeader(http.StatusTemporaryRedirect)
+}

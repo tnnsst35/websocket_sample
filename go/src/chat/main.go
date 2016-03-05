@@ -35,6 +35,15 @@ func (t *templateHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     t.templ.Execute(w, data)
 }
 
+type redirectHandler struct {
+    url string
+}
+
+func (rh *redirectHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Location", rh.url)
+    w.WriteHeader(http.StatusTemporaryRedirect)
+}
+
 func main() {
     /* Step1
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -60,8 +69,10 @@ func main() {
     );
     r := newRoom()
     r.tracer = trace.New(os.Stdout)
+    http.Handle("/", &redirectHandler{url: "/chat"})
     http.Handle("/login", &templateHandler{filename: "login.html"})
     http.HandleFunc("/auth/", loginHandler)
+    http.HandleFunc("/logout", logoutHandler)
     http.Handle("/chat", MustAuth(&templateHandler{filename: "chat.html"}))
     http.Handle("/room", r)
     go r.run()
