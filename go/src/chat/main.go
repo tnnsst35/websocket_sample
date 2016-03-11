@@ -16,6 +16,8 @@ import (
     "github.com/stretchr/objx"
 )
 
+var avatars Avatar = UseFileSystemAvatar
+
 type templateHandler struct {
     once sync.Once
     filename string
@@ -74,7 +76,10 @@ func main() {
     http.HandleFunc("/auth/", loginHandler)
     http.HandleFunc("/logout", logoutHandler)
     http.Handle("/chat", MustAuth(&templateHandler{filename: "chat.html"}))
-    http.Handle("/room", r)
+    http.Handle("/room", r) 
+    http.Handle("/upload", &templateHandler{filename: "upload.html"})
+    http.HandleFunc("/uploader", uploaderHandler)
+    http.Handle("/avatars/", http.StripPrefix("/avatars/", http.FileServer(http.Dir("./avatars"))))
     go r.run()
     // Webサーバーを開始します
     // log.Println("Webサーバーを開始します　ポート：", *addr)
